@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - db
+      - redis
+    environment:
+      - DB_CONNECTION=pgsql
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_DATABASE=laravel
+      - DB_USERNAME=laravel
+      - DB_PASSWORD=secret
+      - REDIS_HOST=redis
+    command: ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+    networks:
+      - laravel
+    ports:
+      - "8000:8000"
+
+  db:
+    image: postgres:13
+    container_name: postgres_db
+    restart: unless-stopped
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: laravel
+      POSTGRES_USER: laravel
+      POSTGRES_PASSWORD: secret
+    networks:
+      - laravel
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: unless-stopped
+    networks:
+      - laravel
+
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel_queue
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    command: php artisan queue:work
+    depends_on:
+      - app
+    networks:
+      - laravel
+
+  horizon:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel_horizon
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    command: php artisan horizon
+    depends_on:
+      - app
+    networks:
+      - laravel
+
+networks:
+  laravel:
+    driver: bridge
+
+volumes:
+  pgdata:
+
