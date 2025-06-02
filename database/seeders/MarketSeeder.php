@@ -11,9 +11,9 @@ class MarketSeeder extends Seeder
     public function run()
     {
         $markets = [
-            ['name' => 'Сільпо', 'url' => 'https://silpo.ua'],
-            ['name' => 'АТБ',    'url' => 'https://atbmarket.com'],
-            ['name' => 'Novus',  'url' => 'https://novus.online'],
+            ['name' => 'Сільпо', 'slug' => 'silpo', 'url' => 'https://silpo.ua'],
+            ['name' => 'АТБ',    'slug' => 'atb',   'url' => 'https://atbmarket.com'],
+            ['name' => 'Novus',  'slug' => 'novus', 'url' => 'https://novus.online'],
         ];
 
         foreach ($markets as $data) {
