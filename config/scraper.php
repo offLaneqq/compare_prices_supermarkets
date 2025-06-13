@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Перелік ринків для парсингу
@@ -13,23 +12,18 @@ return [
     'markets' => [
         'atb' => [
             // Приклад: сторінка категорії "Овочі та фрукти"
-            '287',
-            '285',
-            '585',
-            '292',
-            '294',
-            '591',
-            // 'https://www.atbmarket.com/catalog/maso',
-            '299',
-            '353',
-            '325',
-            '322',
-            // 'https://www.atbmarket.com/catalog/kava-caj',
-            // 'https://www.atbmarket.com/catalog/cipsi-sneki',
-            '360',
-            '339',
-            '415',
-            
+            '287-ovochi-ta-frukti',
+            '285-bakaliya',
+            '292-alkogol-i-tyutyun',
+            '294-napoi-bezalkogol-ni',
+            '299-konditers-ki-virobi',
+            '353-riba-i-moreprodukti',
+            '325-khlibobulochni-virobi',
+            '322-zamorozheni-produkti',
+            '360-kovbasa-i-m-yasni-delikatesi',
+            '339-dityache-kharchuvannya',
+            '415-yapons-ka-kukhnya',
+
             // За потреби додавайте інші URL-адреси категорій:
             // 'https://www.atbmarket.com/catalog/288-miaso-ta-gostyna',
             // 'https://www.atbmarket.com/catalog/289-molochni-produkty',
